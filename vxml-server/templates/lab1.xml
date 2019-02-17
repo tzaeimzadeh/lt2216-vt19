@@ -1,35 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml"
+<?xml version="1.0" encoding="UTF-8" ?>
+<vxml version = "2.1" xmlns="http://www.w3.org/2001/vxml"
       xmlns:voxeo="http://community.voxeo.com/xmlns/vxml">
+    <nomatch>
+        I didn't understand.
+        <reprompt/>
+    </nomatch>
 
-  <nomatch>
-    <property name="timeout" value="3s"/>
-    Sorry I didn't understand
-    <reprompt/>
-  </nomatch>
+    <noinput>
+        You didn't say anything.
+        <reprompt/>
+    </noinput>
 
-  <noinput>
-    <property name="timeout" value="3s"/>
-    You didn't say anything.
-    <reprompt/>
-  </noinput>
+    <!-- Data Model -->
+    <var name="from"/>
+    <var name="to"/>
 
-  <menu id="mainMenu">
-    <prompt bargein="false">
-      <break time="2s"/>
-      Would you like to book a flight or get information about delayed flights?
-    </prompt>
-    <choice next="book_flight">
-      book a flight
-    </choice>
-    <choice next="delayed_flights">
-      delayed flights 
-    </choice>
-  </menu>
+    <!-- State Machine -->
+    <form id="welcome">
+        <block>
+            <prompt>
+                <break time="2000"/>
+                Welcome tot he flight booking service.
+            </prompt>
+            <goto next="#askFrom"/>
+        </block>
+    </form>
 
-  <link next="#mainMenu">
-    <option> main menu </option>
-    <option> start over </option>
-  </link>
+    <form id="askFrom">
+        <field name="fromField">
+            <prompt>
+                What city are you leaving from?
+            </prompt>
+            <option>London</option>
+            <option>Paris</option>
+            <option>New York</option>
+        </field>
+        <filled>
+            <assign name="from" expr="fromField"/>
+            <goto next="#askTo"/>
+        </filled>
+    </form>
 
+    <form id="askTo">
+        <field name="toField">
+            <prompt>
+                Where are you going?
+            </prompt>
+            <option>London</option>
+            <option>Paris</option>
+            <option>New York</option>
+        </field>
+        <filled>
+            <goto next="#askDate"/>
+        </filled>
+    </form>
 </vxml>
