@@ -11,16 +11,18 @@
   <form id="test">
     <field name="foo">
       <prompt>Say something!</prompt>
-      <grammar src="grammars/lab2.xml"/>
+      <grammar src="grammars/lab2_commands.xml"/>
     </field>
     <filled>
 	<prompt>
 	  You said: <value expr="foo$.utterance"/>,
 	  with the interpretation <value expr="foo$.interpretation"/>
-	  and with a confidence of <value expr="foo$.confidence"/>
+	  and with a confidence of <value expr="foo$.confidence"/> .
+	  object was <value expr="foo$.interpretation.object"/>
+	  and action was <value expr="foo$.interpretation.action"/>
 	  <break time="2s"/>
 	</prompt>
-	<goto next="#test"/>
+      <goto next="#test"/>
     </filled>
   </form>
 </vxml>
