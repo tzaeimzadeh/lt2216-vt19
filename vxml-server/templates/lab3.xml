@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <vxml version="2.0">
+
+  <form id="dialogue">
+    <block name="styleDialogue">
+      <prompt>
+	I have your calendar open. 
+	<break strength="medium"/> 
+	For what date? 
+	<break strength="medium"/> 
+	What time <prosody contour="(0%, +30Hz)(50%, +30Hz)(70%, +20Hz)">  would you </prosody> like to start? 
+	<break strength="medium"/> 
+	How much time do you want to <prosody rate="medium"> block </prosody> out? 
+	<break strength="medium"/> 
+	What shall we call <prosody rate="slow"> <prosody pitch="-10%"> <prosody contour="(0%, -10Hz)(50%, -10Hz)(70%, -10Hz)"> this </prosody> </prosody> </prosody>?
+	<break strength="medium"/> 
+	Ok.
+      </prompt>   
+    </block>
+  </form>
+
+  <form id="poetry">
+    <block name="tlc">
+      <prompt>
+	<emphasis level="moderate"><prosody pitch="high"> No </prosody></emphasis>, I don't want no scrub
+	<break time="10ms"/>
+	A scrub is a guy that can't get no <emphasis level="moderate"> love </emphasis> <prosody contour="(0%,50Hz)(30%,30Hz)(50%,40Hz)(70%, 30Hz)"> <prosody rate="-30%"> from <emphasis level="moderate"> me </emphasis> </prosody> </prosody>
+	<break time="10ms"/>
+	Hanging out the passenger side
+	<break time="5ms"/>
+	<prosody rate="-10%"> of </prosody> his best friend's ride
+	<break time="8ms"/>
+	trying to <prosody range="x-high"> holler </prosody> <prosody pitch="+15%"> <prosody range="x-high"><prosody rate="-30%"> at me </prosody> </prosody></prosody>
+      </prompt>
+    </block>  
+  </form>
+
   <form id="test">
     <block name="foo">
       <prompt>
-        The biggest loser among the top 10 cryptocurrencies is bitcoin cash (BCH), down 10.58 percent in the last 24 hours. It's also down 24.11 percent from the recent high of $1,641.40. 
+	<break time="1s"/>
+          The biggest <emphasis level="moderate"> loser </emphasis> among the top 10 <prosody countour="(30%,+20Hz)(60%,+30Hz)"> <phoneme alphabet="ipa" ph="&#x006B;&#x028C;&#x0072;&#x0259;&#x006E;&#x0073;&#x0069;&#x007A;"> cryptocurrencies </phoneme> </prosody> is <prosody duration="15ms">  bitcoin </prosody> cash (BCH), down <say-as interpret-as="cardinal" detail="."> 10.58 </say-as> percent in the last 24 hours. <break/> It's also down <say-as interpret-as="cardinal" detail="."> 24.11 </say-as> percent from the recent high of $1,641.40. 
         <break time="2s"/>
-         The biggest loser among the top 10 cryptocurrencies is bitcoin cash (BCH), down 10.58 percent in the last 24 hours. It's also down 24.11 percent from the recent high of $1,641.40. 
+         The biggest loser among the top 10 cryptocurrencies is <phoneme alphabet="ipa" ph="&#x0062;&#x0069;&#x0074;&#x006B;&#x0254;&#x026A;&#x006E;"> bitcoin </phoneme> cash (BCH), down 10.58 percent in the last 24 hours. It's also down 24.11 percent from the recent high of $1,641.40. 
       </prompt> 
     </block>
-  </form>
+  </form> 
+ 
 </vxml>

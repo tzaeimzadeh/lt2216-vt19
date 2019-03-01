@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<grammar version="1.0" tag-format="semantics/1.0" root="init">
+
+  <rule id="init" scope="public">
+    <one-of>
+      <item>
+	I want to go from <ruleref uri="#askFrom"/> to <ruleref uri="#askTo"/>
+	<tag>out.departureCity = rules.askFrom; out.destination = rules.askTo; </tag>
+      </item>
+      <item>
+	I want to go from <ruleref uri="#askFrom"/> on <ruleref uri="#askDate"/>
+	<tag>out.departureCity = rules.askFrom; out.departureDate = rules.askDate; </tag>
+      </item>
+      <item>
+	I want to go from <ruleref uri="#askDate"/> to <ruleref uri="#askReturn"/>
+	<tag>out.departureDate = rules.askDate; out.returnDate = rules.askReturn; </tag>
+      </item>
+      <item>
+	I want to go from <ruleref uri="#askFrom"/> to <ruleref uri="#askTo"/> on <ruleref uri="#askDate"/> returning on <ruleref uri="#askReturn"/> 
+	<tag>out.departureCity = rules.askFrom; out.destination = rules.askTo; out.departureDate = rules.askDate; out.returnDate = rules.askReturn; </tag>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="choosePlace" scope="public">
+    <one-of>
+      <item> Earth </item>
+      <item> venus </item>
+      <item> mars </item>
+      <item> london </item>
+      <item> paris </item>
+      <item> new york </item>
+    </one-of>
+  </rule>
+
+  <rule id="chooseDate" scope="public">
+    <one-of>
+      <item>Monday</item>
+      <item>Tuesday</item>
+      <item>Wednesday</item>
+      <item>Thursday</item>
+      <item>Friday</item>
+      <item>Saturday</item>
+      <item>Sunday</item>
+    </one-of>
+  </rule>
+
+</grammar>

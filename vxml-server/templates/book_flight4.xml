@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vxml version="2.1"
+      xmlns="http://www.w3.org/2001/vxml"
+      xmlns:voxeo="http://community.voxeo.com/xmlns/vxml">
+
+  <nomatch>
+    <property name="timeout" value="3s"/>
+    Sorry I didn't understand.
+    <reprompt/>
+  </nomatch>
+
+  <noinput>
+    <property name="timeout" value="3s"/>
+    You didn't say anything.
+    <reprompt/>
+  </noinput>
+
+  <!-- Data model -->
+  <var name="from" />
+  <var name="to" />
+  <var name="date" />
+  <var name="retrn" />
+  <!-- HOW DO I LINK THESE UP TO THE INTERPRETATION OBJECTS??? -->
+  
+  <!-- State machine -->
+
+  <form id="welcome">
+    <block>
+      <prompt bargein="false">
+        <break time="1000" />
+        Welcome to the flight booking service. you can go back to the main menu at any point, by saying start over or menu. let's get started.
+      </prompt>
+      <goto next="#askFrom" />
+    </block>
+  </form>
+
+  <form id="askFrom">
+    <field name="fromField">
+      <prompt>
+        What city are you leaving from?
+      </prompt>
+      <prompt count="2">
+	 you can leave from london, paris or new york.
+      </prompt>
+      <grammar src="grammars/lab4.xml#choosePlace"/>
+    </field>
+    <filled>
+      <assign name="from" expr="fromField" />
+      <goto next="#askTo" />
+    </filled>
+  </form>
+
+  <form id="askTo">
+    <field name="toField">
+      <prompt>
+        Where are you going?
+      </prompt>
+      <prompt count="2">
+	 you can fly to london, paris or new york.
+      </prompt>
+      <grammar src="grammars/lab4.xml#choosePlace"/>
+    </field>
+    <filled>
+      <assign name="to" expr="toField" />
+      <if cond="to==from">
+	<prompt>
+	    sorry your destination can not be the same as your departing city. let's start over.
+	</prompt>
+	<goto next="#askFrom"/>
+      <else/>
+      <goto next="#askDate" />
+      </if>
+    </filled>
+  </form>
+
+  <form id="askDate">
+    <field name="dateField">
+      <prompt>
+	What day of the week do you want to leave?
+      </prompt>
+      <prompt count="2">
+	To choose what day you're leaving, you can say any day between monday to sunday.
+      </prompt>
+      <grammar src="grammars/lab4.xml#chooseDate"/>
+    </field>
+    <filled>
+      <assign name="date" expr="dateField"/>
+      <goto next="#askOneway"/>
+    </filled>
+  </form>
+
+  <form id="askOneway">
+    <field name="onewayField">
+      <prompt>
+	Is it a one way trip?
+      </prompt>
+      <option> yes </option>
+      <option> no </option>
+    </field>
+    <filled>
+      <if cond="onewayField == 'yes'">
+	<goto next="#onewayTrip"/>
+	<exit/>
+	<elseif cond="onewayField == 'no'"/>
+	  <goto next="#askReturn"/>
+      </if>
+    </filled>
+  </form>
+     
+   <form id="onewayTrip">
+     <field name="onewayTripField">
+       <prompt bargein="false">
+	  Do you want to go from <value expr="from"/> to <value expr="to"/> on <value expr="date"/>
+       </prompt>
+       <option> yes </option>
+       <option> no </option>
+     </field>
+     <filled>
+       <if cond="onewayTripField == 'yes'">
+	  <goto next="#booked"/>
+	  <elseif cond="onewayTripField == 'no'"/>
+	    <goto next="#askFrom"/>
+       </if>
+     </filled> 
+   </form>
+
+   <form id="askReturn">
+     <field name="askReturnField">
+       <prompt>
+	  what date do you want to return?
+       </prompt>
+       <prompt count="2">
+	 To choose what day to return, you can say any day between monday to sunday.
+       </prompt>
+       <grammar src="grammars/lab4.xml#chooseDate"/>
+     </field>
+     <filled>
+       <assign name="retrn" expr="askReturnField"/>
+       <goto next="#confirmReturn"/>
+     </filled>
+   </form>
+
+   <form id="confirmReturn">
+     <field name="returnField">
+       <prompt bargein="false">
+	  do you want to go from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="retrn"/>
+       </prompt>
+       <option> yes </option>
+       <option> no </option>
+     </field>
+     <filled>
+       <if cond="returnField == 'yes'">
+	  <goto next="#booked"/>
+	  <elseif cond="returnField =='no'"/>
+	  <goto next="#askFrom"/>
+       </if>
+     </filled>
+   </form>
+
+   <form id="booked">
+     <block>
+       <prompt>
+	  your flight has been booked. goodbye. 
+       </prompt>
+     </block>
+   </form>
+
+   <link next="lab1"> 
+     <grammar mode="voice" version="1.0" root="root">
+       <rule id="root" scope="public">
+        <one-of>
+          <item> start over </item>
+          <item> menu </item>
+        </one-of>
+       </rule>
+     </grammar>
+   </link>
+
+ </vxml>
