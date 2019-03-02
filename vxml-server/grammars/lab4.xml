@@ -13,7 +13,7 @@
       </item>
       <item>
 	I want to leave on <ruleref uri="#askDate"/> until <ruleref uri="#askReturn"/>
-	<tag>out.departure = rules.askDate; out.returning = rules.askReturn; </tag>
+	<tag>out.date = rules.askDate; out.returning = rules.askReturn; </tag>
       </item>
       <item>
 	I want to go from <ruleref uri="#askFrom"/> to <ruleref uri="#askTo"/> on <ruleref uri="#askDate"/> returning on <ruleref uri="#askReturn"/> 
