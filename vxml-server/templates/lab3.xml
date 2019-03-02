@@ -2,7 +2,7 @@
 <vxml version="2.0">
 
   <menu id="mainMenu">
-    <prompt bargein="false">
+    <prompt>
       <break time="2s"/>
       There are three options. Would you like to hear about cryptocurrencies, hear a dialogue system assistant or hear a song?
     </prompt>
@@ -52,6 +52,19 @@
   <form id="poetry">
     <block name="tlc">
       <prompt>
+	<emphasis level="moderate"><prosody pitch="high"> No </prosody></emphasis>, <prosody range="+20%"><prosody rate="-10%"> I don't want your number </prosody></prosody>
+	<emphasis level="moderate"><prosody pitch="low"> No </prosody></emphasis>
+	<break time="15ms"/>
+	<prosody rate="-15%"> I don't want to give you <prosody range="+40%">mine</prosody></prosody> <prosody pitch="low"> and </prosody>
+	<emphasis level="moderate"><prosody pitch="low"> No </prosody></emphasis>
+	<break time="15ms"/>
+	I don't <prosody rate="-15%"> want to meet you  <prosody range="+40%">nowhere</prosody> </prosody>
+	<emphasis level="moderate"><prosody pitch="low"> No </prosody></emphasis>
+	<break time="15ms"/>
+	<prosody rate="-15%"> Don't want none of your <prosody range="+40%">time</prosody> </prosody> 
+	
+	<prosody duration="25ms"> <prosody pitch="low"> and </prosody> </prosody>
+
 	<emphasis level="moderate"><prosody pitch="high"> No </prosody></emphasis>, I don't want no scrub
 	<break time="10ms"/>
 	A scrub is a guy that can't get no <emphasis level="moderate"> love </emphasis> <prosody contour="(0%,50Hz)(30%,30Hz)(50%,40Hz)(70%, 30Hz)"> <prosody rate="-30%"> from <emphasis level="moderate"> me </emphasis> </prosody> </prosody>
@@ -60,7 +73,7 @@
 	<break time="5ms"/>
 	<prosody rate="-10%"> of </prosody> his best friend's ride
 	<break time="8ms"/>
-	trying to <prosody range="x-high"> holler </prosody> <prosody pitch="+15%"> <prosody range="x-high"><prosody rate="-30%"> at me </prosody> </prosody></prosody>
+	trying to <prosody range="x-high"> holler </prosody> <prosody pitch="+15%"> <prosody range="x-high"><prosody rate="-30%"> at <emphasis level="moderate"> me </emphasis> </prosody> </prosody></prosody>
       </prompt>
       <goto next="#mainMenu"/>
     </block>
