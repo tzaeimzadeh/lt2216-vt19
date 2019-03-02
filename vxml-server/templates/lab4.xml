@@ -19,10 +19,10 @@
       <break time="2s"/>
       Thank you for using this service, we have two options for you. Would you like to book a flight or get information about delayed flights?
     </prompt>
-    <choice next="book_flight" accept="approximate">
+    <choice next="lab4_bookflight" accept="approximate">
       book a flight
     </choice>
-    <choice next="delayed_flights" accept="approximate">
+    <choice next="lab4_delayedflights" accept="approximate">
       delayed flights 
     </choice>
   </menu>

@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <vxml version="2.0">
 
+  <menu id="mainMenu">
+    <prompt bargein="false">
+      <break time="2s"/>
+      There are three options. Would you like to hear about cryptocurrencies, hear a dialogue system assistant or hear a song?
+    </prompt>
+    <choice next="#test" accept="approximate">
+      cryptocurrencies
+    </choice>
+    <choice next="#dialogue" accept="approximate">
+      a dialogue system assistant
+    </choice>
+    <choice next="#poetry" accept="approximate">
+      hear a song
+    </choice>
+  </menu>
+
+  <form id="test">
+    <block name="foo">
+      <prompt>
+	<break time="1s"/>
+          The biggest <emphasis level="moderate"> loser </emphasis> among the top 10 <prosody countour="(30%,+20Hz)(60%,+30Hz)"> <phoneme alphabet="ipa" ph="&#x006B;&#x028C;&#x0072;&#x0259;&#x006E;&#x0073;&#x0069;&#x007A;"> cryptocurrencies </phoneme> </prosody> is <prosody duration="15ms">  bitcoin </prosody> cash (BCH), down <say-as interpret-as="cardinal" detail="."> 10.58 </say-as> percent in the last 24 hours. <break/> It's also down <say-as interpret-as="cardinal" detail="."> 24.11 </say-as> percent from the recent high of $1,641.40. 
+        <break time="2s"/>
+         The biggest loser among the top 10 cryptocurrencies is <phoneme alphabet="ipa" ph="&#x0062;&#x0069;&#x294;&#x006B;&#x0254;&#x026A;&#x006E;"> bitcoin </phoneme> cash (BCH), down 10.58 percent in the last 24 hours. It's also down 24.11 percent from the recent high of $1,641.40. 
+      </prompt>
+      <goto next="#mainMenu"/> 
+    </block>
+  </form> 
+ 
+
   <form id="dialogue">
     <block name="styleDialogue">
       <prompt>
@@ -8,14 +37,15 @@
 	<break strength="medium"/> 
 	For what date? 
 	<break strength="medium"/> 
-	What time <prosody contour="(0%, +30Hz)(50%, +30Hz)(70%, +20Hz)">  would you </prosody> like to start? 
+	What time <prosody rate="+30%"> would you </prosody> like to start? 
 	<break strength="medium"/> 
-	How much time do you want to <prosody rate="medium"> block </prosody> out? 
+	How much time do you want to <prosody rate="+30%"> <prosody range="-15%"> block out </prosody> </prosody>? 
 	<break strength="medium"/> 
-	What shall we call <prosody rate="slow"> <prosody pitch="-10%"> <prosody contour="(0%, -10Hz)(50%, -10Hz)(70%, -10Hz)"> this </prosody> </prosody> </prosody>?
+	What shall we <prosody range="-20%"> <prosody rate="+20%%"> call this </prosody></prosody>?
 	<break strength="medium"/> 
 	Ok.
-      </prompt>   
+      </prompt>
+      <goto next="#mainMenu"/>
     </block>
   </form>
 
@@ -32,18 +62,8 @@
 	<break time="8ms"/>
 	trying to <prosody range="x-high"> holler </prosody> <prosody pitch="+15%"> <prosody range="x-high"><prosody rate="-30%"> at me </prosody> </prosody></prosody>
       </prompt>
-    </block>  
+      <goto next="#mainMenu"/>
+    </block>
   </form>
 
-  <form id="test">
-    <block name="foo">
-      <prompt>
-	<break time="1s"/>
-          The biggest <emphasis level="moderate"> loser </emphasis> among the top 10 <prosody countour="(30%,+20Hz)(60%,+30Hz)"> <phoneme alphabet="ipa" ph="&#x006B;&#x028C;&#x0072;&#x0259;&#x006E;&#x0073;&#x0069;&#x007A;"> cryptocurrencies </phoneme> </prosody> is <prosody duration="15ms">  bitcoin </prosody> cash (BCH), down <say-as interpret-as="cardinal" detail="."> 10.58 </say-as> percent in the last 24 hours. <break/> It's also down <say-as interpret-as="cardinal" detail="."> 24.11 </say-as> percent from the recent high of $1,641.40. 
-        <break time="2s"/>
-         The biggest loser among the top 10 cryptocurrencies is <phoneme alphabet="ipa" ph="&#x0062;&#x0069;&#x0074;&#x006B;&#x0254;&#x026A;&#x006E;"> bitcoin </phoneme> cash (BCH), down 10.58 percent in the last 24 hours. It's also down 24.11 percent from the recent high of $1,641.40. 
-      </prompt> 
-    </block>
-  </form> 
- 
 </vxml>

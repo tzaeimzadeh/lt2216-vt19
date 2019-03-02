@@ -24,16 +24,20 @@
   
   <!-- State machine -->
 
+
+   
   <form id="welcome">
-    <grammar src="grammars/lab4.xml"/>
-    <block>
+     <block>
       <prompt bargein="false">
         <break time="1000" />
         Welcome to the flight booking service. you can go back to the main menu at any point, by saying start over or menu. let's get started.
       </prompt>
-      <goto next="#askFrom" />
+      <goto next="#journey" />
     </block>
+  </form>
 
+  <form id="journey">
+    <grammar src="grammars/lab4.xml"/>
     <field name="askFrom">
       <prompt>
 	Tell me about your journey
@@ -46,6 +50,9 @@
       </prompt>
       <grammar src="grammars/lab4.xml#choosePlace"/>
     </field>
+    <filled>
+     <assign name="from" expr="askFrom"/> 
+    </filled>
 
     <field name="askTo">
       <prompt>
@@ -56,6 +63,9 @@
       </prompt>
       <grammar src="grammars/lab4.xml#choosePlace"/>
     </field>
+    <filled>
+      <assign name="to" expr="askTo"/>
+    </filled>
     
     <field name="askDate">
       <prompt>
@@ -66,6 +76,9 @@
       </prompt>
       <grammar src="grammars/lab4.xml#chooseDate"/>
     </field>
+    <filled>
+      <assign name="date" expr="askDate"/>
+    </filled>
 
     <field name="askReturn">
        <prompt>
@@ -76,8 +89,11 @@
        </prompt>
        <grammar src="grammars/lab4.xml#chooseDate"/>
      </field>
-     
-     <field name="askFood">
+     <filled>
+       <assign name="retrn" expr="askReturn"/>
+     </filled>
+
+     <field name="askFoodField">
        <prompt>
 	 what type of meal would you like to have on board the flight?
        </prompt>
@@ -87,97 +103,12 @@
        <grammar src="grammars/lab4.xml#foodMenu"/>
      </field>
 
-     <filled>
+     <block>
        <prompt> 
 	 do you want to go from <value expr="askFrom$.interpretation.departureCity"/> to  <value expr="askTo$.interpretation.destination"/> on <value expr="askDate$.interpretation.departureDate"/> returning <value expr="askReturn$.interpretation.returnDate"/>
        </prompt>
-     </filled>
-
-   <!--
-    <filled>
-      <assign name="from" expr="askFrom" />
-    </filled>
-
-    <filled>
-      <assign name="to" expr="askTo" />
-      <if cond="to==from">
-	<prompt>
-	    sorry your destination can not be the same as your departing city. let's start over.
-	</prompt>
-	<goto next="#askFrom"/>
-      <else/>
-      <goto next="#askDate" />
-      </if>
-    </filled>
-
-    <filled>
-      <assign name="date" expr="askDate"/>
-      <goto next="#askOneway"/>
-    </filled>
-
-    <field name="askOneway">
-      <prompt>
-	Is it a one way trip?
-      </prompt>
-      <option> yes </option>
-      <option> no </option>
-    </field>
-    <filled>
-      <if cond="askOneway == 'yes'">
-	<goto next="#onewayTrip"/>
-	<exit/>
-	<elseif cond="askOneway == 'no'"/>
-	  <goto next="#askReturn"/>
-      </if>
-    </filled>
-
-     <field name="onewayTrip">
-       <prompt bargein="false">
-	  Do you want to go from <value expr="from"/> to <value expr="to"/> on <value expr="date"/>
-       </prompt>
-       <option> yes </option>
-       <option> no </option>
-     </field>
-     <filled>
-       <if cond="onewayTrip == 'yes'">
-	  <goto next="#booked"/>
-	  <elseif cond="onewayTrip == 'no'"/>
-	    <goto next="#askFrom"/>
-       </if>
-     </filled> 
-
-     
-     <filled>
-       <assign name="retrn" expr="askReturn"/>
-       <goto next="#confirmReturn"/>
-     </filled>
-
-     <field name="confirmReturn">
-       <prompt bargein="false">
-	  do you want to go from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="retrn"/>"
-       </prompt>
-       <option> yes </option>
-       <option> no </option>
-     </field>
-     <filled>
-       <if cond="confirmReturn == 'yes'">
-	  <goto next="#booked"/>
-	  <elseif cond="confirmReturn =='no'"/>
-	  <goto next="#askFrom"/>
-       </if>
-     </filled>
-     
-     -->
-
-   <field name="booked">
-     <block>
-       <prompt>
-	  your flight has been booked. goodbye. 
-       </prompt>
      </block>
-   </field>
-
- </form>
+   </form>
 
    <link next="lab1"> 
      <grammar mode="voice" version="1.0" root="root">
@@ -189,5 +120,6 @@
        </rule>
      </grammar>
    </link>
+
   
- </vxml>
+</vxml>

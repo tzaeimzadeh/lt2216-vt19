@@ -31,6 +31,28 @@ def lab3():
     response.headers["Content-Type"] = "application/xml"
     return response
 
+@app.route('/lab4')
+def lab4():
+    vxml = render_template('lab4.xml')
+    response = make_response(vxml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+@app.route('/lab4_bookflight')
+def book_flight4():
+    vxml = render_template('lab4_bookflight.xml')
+    response = make_response(vxml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+@app.route('/lab4_delayedflights')
+def lab4_delayedflights():
+    vxml = render_template('lab4_delayedflights.xml')
+    response = make_response(vxml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+
 @app.route('/grammars/<path:path>')
 def send_grammar(path):
     return send_from_directory('grammars', path)

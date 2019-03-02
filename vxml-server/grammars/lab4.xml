@@ -5,24 +5,28 @@
     <one-of>
       <item>
 	I want to go from <ruleref uri="#askFrom"/> to <ruleref uri="#askTo"/>
-	<tag>out.departureCity = rules.askFrom; out.destination = rules.askTo; </tag>
+	<tag>out.departure = rules.askFrom; out.destination = rules.askTo; </tag>
       </item>
       <item>
 	I want to go from <ruleref uri="#askFrom"/> on <ruleref uri="#askDate"/>
-	<tag>out.departureCity = rules.askFrom; out.departureDate = rules.askDate; </tag>
+	<tag>out.departure = rules.askFrom; out.date = rules.askDate; </tag>
       </item>
       <item>
-	I want to go from <ruleref uri="#askDate"/> to <ruleref uri="#askReturn"/>
-	<tag>out.departureDate = rules.askDate; out.returnDate = rules.askReturn; </tag>
+	I want to leave on <ruleref uri="#askDate"/> until <ruleref uri="#askReturn"/>
+	<tag>out.departure = rules.askDate; out.returning = rules.askReturn; </tag>
       </item>
       <item>
 	I want to go from <ruleref uri="#askFrom"/> to <ruleref uri="#askTo"/> on <ruleref uri="#askDate"/> returning on <ruleref uri="#askReturn"/> 
-	<tag>out.departureCity = rules.askFrom; out.destination = rules.askTo; out.departureDate = rules.askDate; out.returnDate = rules.askReturn; </tag>
+	<tag>out.departure = rules.askFrom; out.destination = rules.askTo; out.date = rules.askDate; out.returning = rules.askReturn; </tag>
+      </item>
+      <item>
+	I want to go from <ruleref uri="#askFrom"/> with a <ruleref uri="#askFood"/> meal
+	<tag>out.departure = rules.askFrom; out.meal = rules.askFood; </tag>
       </item>
     </one-of>
   </rule>
 
-  <rule id="choosePlace" scope="public">
+  <rule id="choosePlace">
     <one-of>
       <item> Earth </item>
       <item> venus </item>
@@ -33,7 +37,7 @@
     </one-of>
   </rule>
 
-  <rule id="chooseDate" scope="public">
+  <rule id="chooseDate">
     <one-of>
       <item>Monday</item>
       <item>Tuesday</item>
@@ -42,6 +46,14 @@
       <item>Friday</item>
       <item>Saturday</item>
       <item>Sunday</item>
+    </one-of>
+  </rule>
+
+  <rule id="foodMenu">
+    <one-of>
+      <item>Chicken</item>
+      <item>Fish</item>
+      <item>Vegetarian</item>
     </one-of>
   </rule>
 
