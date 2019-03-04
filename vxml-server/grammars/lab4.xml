@@ -4,33 +4,83 @@
   <rule id="init" scope="public">
     <one-of>
       <item>
-	I want to go from <ruleref uri="#askFrom"/> to <ruleref uri="#askTo"/>
-	<tag>out.departure = rules.askFrom; out.destination = rules.askTo; </tag>
+	<ruleref uri="#origin"/> <tag> out.departure = rules.origin;</tag>
       </item>
       <item>
-	I want to go from <ruleref uri="#askFrom"/> on <ruleref uri="#askDate"/>
-	<tag>out.departure = rules.askFrom; out.date = rules.askDate; </tag>
+	<ruleref uri="#dest"/> <tag>out.destination = rules.dest;</tag>
       </item>
       <item>
-	I want to leave on <ruleref uri="#askDate"/> until <ruleref uri="#askReturn"/>
-	<tag>out.date = rules.askDate; out.returning = rules.askReturn; </tag>
+	<ruleref uri="#leavingDate"/> <tag> out.date = rules.leavingDate;</tag>
       </item>
       <item>
-	I want to go from <ruleref uri="#askFrom"/> to <ruleref uri="#askTo"/> on <ruleref uri="#askDate"/> returning on <ruleref uri="#askReturn"/> 
-	<tag>out.departure = rules.askFrom; out.destination = rules.askTo; out.date = rules.askDate; out.returning = rules.askReturn; </tag>
+	<ruleref uri="#returnDate"/> <tag>out.returning = rules.returnDate;</tag>
       </item>
       <item>
-	I want to go from <ruleref uri="#askFrom"/> with a <ruleref uri="#askFood"/> meal
-	<tag>out.departure = rules.askFrom; out.meal = rules.askFood; </tag>
+	<ruleref uri="#foodMenu"/> <tag>out.meal=rules.foodMenu;</tag>
+      </item>
+      <item>
+	<ruleref uri="#origin"/><ruleref uri="#dest"/>
+	<tag> out.departure = rules.origin; out.destination = rules.dest; </tag>
+      </item>
+      <item>
+	<ruleref uri="#origin"/><ruleref uri="#dest"/><ruleref uri="#leavingDate"/>
+	<tag> out.departure = rules.origin; out.destination = rules.dest; out.date = rules.leavingDate;</tag>
+      </item>
+      <item>
+	<ruleref uri="#origin"/><ruleref uri="#leavingDate"/>
+	<tag> out.departure = rules.origin; out.date = rules.leavingDate; </tag>
+      </item>
+      <item> 
+	<ruleref uri="#leavingDate"/><ruleref uri="#returnDate"/>
+	<tag> out.date = rules.leavingDate; out.returning = rules.returnDate;</tag>
+      </item>
+      <item>
+	<ruleref uri="#origin"/><ruleref uri="#dest"/><ruleref uri="#leavingDate"/><ruleref uri="#returnDate"/>
+	<tag> out.departure = rules.origin; out.destination = rules.dest; out.date = rules.leavingDate; out.returning = rules.returnDate;</tag>
+      </item>
+      <item>
+	<ruleref uri="#origin"/><ruleref uri="#dest"/><ruleref uri="#foodMenu"/>
+	<tag> out.departure = rules.origin; out.destination = rules.dest; out.meal = rules.foodMenu;</tag>
       </item>
     </one-of>
   </rule>
 
-  <rule id="choosePlace">
+  <rule id="origin" scope="public">
     <one-of>
-      <item>earth<tag>out="earth";</tag></item>
-      <item>venus<tag>out="venus";</tag></item>
-      <item>mars<tag>out="mars";</tag></item>
+      <item>go from</item>
+      <item> leaving from </item>
+    </one-of>
+    <ruleref uri="#choosePlace"/><tag>out=rules.choosePlace;</tag>
+  </rule>
+
+  <rule id="dest" scope="public">
+    <one-of> 
+      <item>to</item>
+      <item> going to</item>
+    </one-of>
+    <ruleref uri="#choosePlace"/><tag>out=rules.choosePlace</tag>
+  </rule>
+
+  <rule id="leavingDate">
+    <one-of>
+      <item> on </item>
+      <item> leaving on </item>
+      <item> from </item>
+    </one-of>
+    <ruleref uri="#chooseDate"/><tag>out=rules.chooseDate</tag>
+  </rule>
+
+  <rule id="returnDate">
+    <one-of>
+      <item> returning on </item>
+      <item> to </item>
+    </one-of>
+    <ruleref uri="#chooseDate"/><tag>out=rules.chooseDate</tag>
+  </rule>
+  
+
+  <rule id="choosePlace" scope="public">
+    <one-of>
       <item>london<tag>out="london";</tag></item>
       <item>paris<tag>out="paris";</tag></item>
       <item>new york<tag>out="new york";</tag></item>

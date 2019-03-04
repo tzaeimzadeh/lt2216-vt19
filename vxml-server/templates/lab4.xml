@@ -15,7 +15,7 @@
   </noinput>
 
   <menu id="mainMenu">
-    <prompt bargein="false">
+    <prompt>
       <break time="2s"/>
       Thank you for using this service, we have two options for you. Would you like to book a flight or get information about delayed flights?
     </prompt>
@@ -26,5 +26,4 @@
       delayed flights 
     </choice>
   </menu>
-
 </vxml>

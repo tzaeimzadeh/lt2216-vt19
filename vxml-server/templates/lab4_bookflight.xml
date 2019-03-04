@@ -16,10 +16,10 @@
   </noinput>
    
   <form id="welcome">
-     <block>
+    <block>
       <prompt bargein="false">
-        <break time="1000" />
-        Welcome to the flight booking service.
+	<break time="1000" />
+	welcome to the flight booking service. tell me about your journey
       </prompt>
       <goto next="#journey"/>
     </block>
@@ -27,65 +27,35 @@
 
   <form id="journey">
     <grammar src="grammars/lab4.xml"/>
-    <field name="askFrom">
-      <prompt>
-	Tell me about your journey
-      </prompt>
-      <prompt count="2">
-        What city are you leaving from?
-      </prompt>
-      <prompt count="3">
-	 you can leave from london, paris or new york.
-      </prompt>
-      <grammar src="grammars/lab4.xml#choosePlace"/>
+    <field name="departure">
+      <grammar src="grammars/lab4.xml#origin"/>
+      <prompt count="2"> where are you leaving from? </prompt>
+      <prompt count="3"> you can say london, paris or new york </prompt>
     </field>
-
-    <field name="askTo">
-      <prompt>
-        Where are you going?
-      </prompt>
-      <prompt count="2">
-	 you can fly to london, paris or new york.
-      </prompt>
-      <grammar src="grammars/lab4.xml#choosePlace"/>
+    <field name="destination">
+      <grammar src="grammars/lab4.xml#dest"/>
+      <prompt> where are you going </prompt>
     </field>
-
-    <field name="askDate">
-      <prompt>
-	What day of the week do you want to leave?
-      </prompt>
-      <prompt count="2">
-	To choose what day you're leaving, you can say any day between monday to sunday.
-      </prompt>
-      <grammar src="grammars/lab4.xml#chooseDate"/>
+    <field name="date">
+      <grammar src="grammars/lab4.xml#leavingDate"/>
+      <prompt> what date are you leaving </prompt>
+      <prompt count="2"> to choose your leaving date you can say any day of the week </prompt>
     </field>
+    <field name="returning">
+      <grammar src="grammars/lab4.xml#returnDate"/>
+      <prompt> what date are you returning </prompt>
+      <prompt count="2"> to choose your return date you can say any day of the week </prompt>
+    </field>
+    <field name="meal">
+      <grammar src="grammars/lab4.xml#foodMenu"/>
+      <prompt> what type of meal would you like </prompt>
+      <prompt count="2"> to choose your meal you can say chicken, fish or vegetarian </prompt>
+    </field>
+    <filled>
+      you are going from <value expr="departure$.interpretation.departure"/> to <value expr="destination$.interpretation.destination"/>
+      leaving on <value expr="date$.interpretation.date"/> to <value expr="returning$.interpretation.returning"/>
+      with a <value expr="meal$.interpretation.meal"/> meal
+    </filled>
+  </form>
 
-    <field name="askReturn">
-       <prompt>
-	  what date do you want to return?
-       </prompt>
-       <prompt count="2">
-	 To choose what day to return, you can say any day between monday to sunday.
-       </prompt>
-       <grammar src="grammars/lab4.xml#chooseDate"/>
-     </field>
-
-     <field name="askFood">
-       <prompt>
-	 what type of meal would you like to have on board the flight?
-       </prompt>
-       <prompt count="2">
-	 To choose what type of meal you'd like, you can say chicken, fish or vegetarian.
-       </prompt>
-       <grammar src="grammars/lab4.xml#foodMenu"/>
-     </field>
-
-     <filled>
-       <prompt> 
-	 do you want to go from <value expr="askFrom$.interpretation.departure"/> to  <value expr="askTo$.interpretation.destination"/> on <value expr="askDate$.interpretation.date"/> returning <value expr="askReturn$.interpretation.returning"/>
-       </prompt>
-     </filled>
-   </form>
-
-  
 </vxml>
