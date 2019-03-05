@@ -25,13 +25,15 @@
     <block>
       <prompt bargein="false">
 	<break time="1000" />
-	welcome to the flight booking service. tell me about your journey
+	welcome to the flight booking service. you can go back to the main menu at any point by saying start over or menu.
+	<break time="1s"/>
       </prompt>
       <goto next="#journey"/>
     </block>
   </form>
 
   <form id="journey">
+    <block> tell me about your journey </block>
     <grammar src="grammars/lab4.xml"/>
     <field name="departure">
       <grammar src="grammars/lab4.xml#origin"/>
@@ -63,7 +65,7 @@
       <assign name="to" expr="destination"/>
       <if cond="from==to">
 	<prompt> sorry your destination can not be the same as your departure city. let's start over. </prompt>
-	<goto next="#welcome"/>
+	<goto next="#journey"/>
       </if>
       <assign name="day" expr="date"/>
       <assign name="retrn" expr="returning"/>
@@ -86,12 +88,23 @@
 	<goto nextitem="booked"/>
 	<elseif cond="summary =='no'"/>
 	<prompt> oops let's start over. </prompt>
-	<goto next="#welcome"/>
+	<goto next="#journey"/>
       </if>
     </filled>
     <block name="booked">
       <prompt> yay your flight is booked, bye bye </prompt>
     </block>
   </form>
+
+  <link next="lab4"> 
+    <grammar mode="voice" version="1.0" root="root">
+      <rule id="root" scope="public">
+	<one-of>
+	  <item> start over </item>
+          <item> menu </item>
+        </one-of>
+      </rule>
+    </grammar>
+  </link>
 
 </vxml>

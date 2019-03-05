@@ -7,7 +7,7 @@
     <block>
       <break time="2s"/>
       All flights are delayed. Sorry.
-     <goto next="lab1"/>
+     <goto next="lab4"/>
     </block>
   </form>
 
