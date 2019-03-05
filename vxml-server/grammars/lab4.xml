@@ -4,19 +4,19 @@
   <rule id="init" scope="public">
     <one-of>
       <item>
-	<ruleref uri="#origin"/> <tag> out.departure = rules.origin;</tag>
+	<ruleref uri="#origin"/><tag>out=rules.origin;</tag> 
       </item>
       <item>
-	<ruleref uri="#dest"/> <tag>out.destination = rules.dest;</tag>
+	<ruleref uri="#dest"/> <tag>out=rules.dest;</tag>
       </item>
       <item>
-	<ruleref uri="#leavingDate"/> <tag> out.date = rules.leavingDate;</tag>
+	<ruleref uri="#leavingDate"/> <tag>out=rules.leavingDate;</tag>
       </item>
       <item>
-	<ruleref uri="#returnDate"/> <tag>out.returning = rules.returnDate;</tag>
+	<ruleref uri="#returnDate"/> <tag>out=rules.returnDate;</tag>
       </item>
       <item>
-	<ruleref uri="#foodMenu"/> <tag>out.meal=rules.foodMenu;</tag>
+	<ruleref uri="#foodMenu"/> <tag>out=rules.foodMenu;</tag>
       </item>
       <item>
 	<ruleref uri="#origin"/><ruleref uri="#dest"/>
@@ -42,21 +42,28 @@
 	<ruleref uri="#origin"/><ruleref uri="#dest"/><ruleref uri="#foodMenu"/>
 	<tag> out.departure = rules.origin; out.destination = rules.dest; out.meal = rules.foodMenu;</tag>
       </item>
+      <item>
+	<ruleref uri="#origin"/><ruleref uri="#foodMenu"/>
+	<tag> out.departure = rules.origin; out.meal = rules.foodMenu;</tag>
+      </item>
     </one-of>
   </rule>
 
-  <rule id="origin" scope="public">
+  <rule id="origin">
     <one-of>
+      <item>departing from</item>
       <item>go from</item>
-      <item> leaving from </item>
+      <item>leaving from </item>
+      <item>from</item>
     </one-of>
     <ruleref uri="#choosePlace"/><tag>out=rules.choosePlace;</tag>
   </rule>
 
-  <rule id="dest" scope="public">
+  <rule id="dest">
     <one-of> 
       <item>to</item>
-      <item> going to</item>
+      <item>going to</item>
+      <item>flying to</item>
     </one-of>
     <ruleref uri="#choosePlace"/><tag>out=rules.choosePlace</tag>
   </rule>
@@ -74,12 +81,13 @@
     <one-of>
       <item> returning on </item>
       <item> to </item>
+      <item> until </item>
     </one-of>
     <ruleref uri="#chooseDate"/><tag>out=rules.chooseDate</tag>
   </rule>
   
 
-  <rule id="choosePlace" scope="public">
+  <rule id="choosePlace">
     <one-of>
       <item>london<tag>out="london";</tag></item>
       <item>paris<tag>out="paris";</tag></item>

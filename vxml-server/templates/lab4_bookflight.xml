@@ -14,6 +14,12 @@
     You didn't say anything.
     <reprompt/>
   </noinput>
+
+  <var name="from"/>
+  <var name="to"/>
+  <var name="day"/>
+  <var name="retrn"/>
+  <var name="food"/>
    
   <form id="welcome">
     <block>
@@ -31,10 +37,11 @@
       <grammar src="grammars/lab4.xml#origin"/>
       <prompt count="2"> where are you leaving from? </prompt>
       <prompt count="3"> you can say london, paris or new york </prompt>
-    </field>
+    </field>  
     <field name="destination">
       <grammar src="grammars/lab4.xml#dest"/>
       <prompt> where are you going </prompt>
+      <prompt count="2"> to choose your destination you can say london, paris or new york </prompt>
     </field>
     <field name="date">
       <grammar src="grammars/lab4.xml#leavingDate"/>
@@ -52,10 +59,39 @@
       <prompt count="2"> to choose your meal you can say chicken, fish or vegetarian </prompt>
     </field>
     <filled>
-      you are going from <value expr="departure$.interpretation.departure"/> to <value expr="destination$.interpretation.destination"/>
-      leaving on <value expr="date$.interpretation.date"/> to <value expr="returning$.interpretation.returning"/>
-      with a <value expr="meal$.interpretation.meal"/> meal
+      <assign name="from" expr="departure"/>
+      <assign name="to" expr="destination"/>
+      <if cond="from==to">
+	<prompt> sorry your destination can not be the same as your departure city. let's start over. </prompt>
+	<goto next="#welcome"/>
+      </if>
+      <assign name="day" expr="date"/>
+      <assign name="retrn" expr="returning"/>
+      <assign name="food" expr="meal"/>
+      <goto next="#confirm"/>
     </filled>
+  </form>
+
+  <form id="confirm">
+    <field name="summary">
+      <prompt>
+	you are flying from <value expr="from"/> to <value expr="to"/> on <value expr="day"/> returning on <value expr="retrn"/> 
+	with a <value expr="food"/> meal. <break/> is this correct?
+      </prompt>
+      <option> yes </option>
+      <option> no </option>
+    </field>
+    <filled>
+      <if cond="summary == 'yes'">
+	<goto nextitem="booked"/>
+	<elseif cond="summary =='no'"/>
+	<prompt> oops let's start over. </prompt>
+	<goto next="#welcome"/>
+      </if>
+    </filled>
+    <block name="booked">
+      <prompt> yay your flight is booked, bye bye </prompt>
+    </block>
   </form>
 
 </vxml>
