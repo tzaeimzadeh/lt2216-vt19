@@ -1,1 +1,11 @@
-Most of the shortcomings I reported in lab 1 were to do with the prompts used in the flight booking application. For example, the very open/non-directive command at the start. In my application, the start menu lists explicitly what the options available to the user are. Similarly, the error messages were not very informative; whilst, in my application, after the noinput or nomatch event prompts, the system is directed to more detailed reprompts, which include more explicit information about how the user can respond. Furthermore, in case of the application having to return to the start of the booking service (e.g. if the destination and departing cities are the same, or the system did not collect the right information from the user), the system provides the user with information that it is starting over, and goes back to the original prompt asking the user about their journey, rather than just going to the start and not prompting the user at all. Additionally, the system confirms the information with the user in a more coherent manner than the flight booking application from lab 1. Also this application has a universal 'start over' command, which it informs the user about in the beginning, so that they are aware of the possibility. 
+Most of the shortcomings I reported in lab 1 were to do with the prompts used in the flight booking application. For example, 
+the very open/non-directive command at the start. In my application, the start menu lists explicitly what the options 
+available to the user are. Similarly, the error messages were not very informative; whilst, in my application, after the 
+noinput or nomatch event prompts, the system is directed to more detailed reprompts, which include more explicit information 
+about how the user can respond. Furthermore, in case of the application having to return to the start of the booking service 
+(e.g. if the destination and departing cities are the same, or the system did not collect the right information from the 
+user), the system provides the user with information that it is starting over, and goes back to the original prompt asking the 
+user about their journey, rather than just going to the start and not prompting the user at all. Additionally, the system 
+confirms the information with the user in a more coherent manner than the flight booking application from lab 1. Also this 
+application has a universal 'start over' command, which it informs the user about in the beginning, so that they are aware of 
+the possibility. 
